@@ -1,0 +1,2352 @@
+/*!
+ * Theme: /r/A_D
+ * Author: /u/postpics
+ * Comment: Add all custom CSS at the end so the base stylesheet can be updated
+ *   without losing changes. The sourceMappingURL line can be safely deleted.
+ */
+
+// Colors
+$banner: hsl(0,0%,70%);
+$button:#3D446B;
+$menu:hsla(196, 91%, 40%, 0.5);
+$subscribeBtn: #0990C1;
+$sidebar: hsl(0,0%,93%);
+$card: hsla(195, 100%, 45%, 1);
+
+// Dimensions
+$headerHeight: 200px;
+$tabmenuHeight: 28px;
+$sidebarWidth: 320px;
+$userbarHeight: 30px;
+$largeViewport: 1600px;
+$mediumViewport: 1200px;
+$smallViewport: 870px;
+
+// Shadows
+$shadow-2dp: 0px 2px 0px 0px rgba(0, 0, 0, 0.24);
+$shadow-8dp: -3px 6px 0px 0px rgba(0,0,0,0.2);
+
+// Links
+$linkDefault: #0079d3;
+$linkVisited: #8114b8;
+$sticky: hsl(140, 70%, 35%);
+
+@mixin transform($args) {
+	-webkit-transform: $args;
+	-moz-transform: $args;
+	-ms-transform: $args;
+	transform: $args;
+}
+
+@mixin flexbox {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+%flexbox { @include flexbox; }
+
+%vCenter {
+	top: 50%;
+	transform: translate(0, -50%);
+}
+
+%buttonBase {
+	display: inline-block;
+	padding: 0 12px;
+	font: normal 1.2rem/32px arial, sans-serif;
+	text-transform: uppercase;
+	text-align: center;
+	border: none;
+	border-radius: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	vertical-align: middle;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+%buttonRaised {
+	@extend %buttonBase;
+	margin: 0 4px 0 0;
+	color: white;
+	background: $button;
+	box-shadow: $shadow-2dp;
+	transition: background .2s, box-shadow .2s;
+
+	&:hover {
+		box-shadow: $shadow-8dp;
+	}
+
+	&:active {
+		background: hsl(0,0%,0%)
+	}
+}
+
+%buttonFlat {
+	@extend %buttonBase;
+	color: black;
+	background: transparent;
+	transition: background .2s;
+
+	&:hover {
+		background: hsla(0,0%,0%,.12);
+	}
+}
+
+%textToIcon {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	font: normal 0/1 sans-serif;
+	color: transparent;
+	vertical-align: middle;
+	background-repeat: no-repeat;
+}
+
+%sheet {
+	// Use shadow instead of border for blending with backgrounds.
+	border: none;
+	box-shadow: 0 0 0 1px hsla(0,0%,0%,.12);
+	background: hsl(0,00%,100%);
+	border-radius: 5px;
+}
+
+// Links
+.thing .title {
+	color: hsl(210,100%,45%);
+}
+
+.thing .title:visited,
+.thing.visited .title {
+	color: hsl(300,15%,0%);
+}
+
+.thing a.title:hover,
+.md a:hover {
+	text-decoration: underline;
+}
+
+.md a:visited {
+	color: $linkVisited;
+}
+
+html {
+	font: normal 62.5%/1 verdana, arial, sans-serif;
+}
+
+body {
+	padding-bottom: 20px;
+	font-size: 1rem;
+	background: hsl(0,0%,100%);
+
+	&.mod-toolbox {
+		overflow: visible;
+	}
+
+	&.res-commentBoxes {
+
+		&>.content {
+			padding-right: 10px !important;
+		}
+
+		.comment {
+			overflow: visible;
+		}
+	}
+}
+
+#sr-header-area {
+	position: absolute;
+	z-index: 1;
+	font-size: .9rem;
+	color: hsla(0,0%,100%,.4);
+	height: 22px;
+	line-height: 22px;
+	border: none;
+	transition-property: z-index, background;
+	transition-delay: .15s;
+	transition-duration: .4s;
+	background: none;
+	top: 0; right: -$sidebarWidth; bottom: auto; left: 0;
+
+	a, .separator, .srSep {
+		color: hsla(0,0%,100%,1);
+	}
+
+	.drop-choices.srdrop {
+		border: none;
+		box-shadow: $shadow-8dp;
+
+		a {
+			color: black;
+		}
+	}
+
+	#RESShortcutsEditContainer {
+		z-index: auto;
+		background: #444;
+		visibility: hidden;
+	}
+
+	#sr-more-link, #RESShortcutsSort, #RESShortcutsRight, #RESShortcutsLeft, #RESShortcutsAdd, #RESShortcutsTrash {
+		color: inherit;
+		height: 22px;
+		line-height: 20px;
+		background: transparent;
+	}
+
+	&:hover {
+		z-index: 3;
+		background: #444;
+
+		#sr-more-link {
+			background: #444;
+		}
+
+		a,
+		#RESShortcutsEditContainer {
+			color: hsla(0,0%,100%,.8);
+			visibility: visible;
+		}
+	}
+}
+
+body.res #sr-header-area a.RESShortcutsCurrentSub,
+#sr-header-area .selected a {
+	color: white !important;
+	font-weight: normal;
+}
+
+.sr-bar .separator {
+	color: hsla(0,0%,100%,.3);
+}
+
+.dropdown.srdrop {
+
+	.selected {
+		color: hsla(0,0%,100%,.6);
+		background: none;
+		padding-right: 5px;
+
+		&:after {
+			content: "";
+			display: inline-block;
+			height: 0px;
+			width: 1px;
+			border: 5px solid transparent;
+			border-top-color: hsla(0,0%,100%,.6);
+			position: relative;
+			left: 5px;
+			top: 3px;
+		}
+	}
+}
+
+#header {
+	border: none;
+	margin-right: $sidebarWidth;
+	font-size: 1rem;
+	z-index: 3;
+	background-color: $banner;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: right top;
+	transition: background-color .3s ease-in-out;
+
+	.tabmenu {
+		position: absolute;
+		top: auto;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: 0;
+		text-transform: uppercase;
+		font-size: 1.2rem;
+		font-family: arial;
+		line-height: $tabmenuHeight;
+		background: $menu;
+		z-index: 1;
+
+		#viewImagesButton {
+			position: absolute;
+			font-size: 1rem;
+			top: 0;
+			right: 0;
+			font-family: verdana, sans-serif;
+		}
+
+		li {
+			display: inline-block;
+			font-weight: normal;
+			margin: 0;
+
+			a {
+				display: block;
+				padding: 0 1rem;
+				color: hsl(0,0%,100%);
+				background: none;
+				transition: background .15s;
+
+				&:hover {
+					background: hsla(0,0%,100%,.15)
+				}
+
+				&:active {
+					background: black;
+				}
+			}
+
+			&.selected a {
+				border: none;
+				color: black;
+				background: white;
+				z-index: auto;
+				box-shadow: 0 -8px 10px -7px hsla(0,0%,100%,.6);
+			}
+		}
+	}
+}
+
+#header-bottom-left {
+	box-sizing: border-box;
+	height: $headerHeight;
+	text-align: center;
+	background: none;
+	border-bottom: $tabmenuHeight solid hsla(0,0%,0%,.2);
+}
+
+#header-img-a {
+	position: absolute;
+	left: 20px;
+	bottom: $tabmenuHeight;
+	margin: 0;
+	z-index: 1;
+
+	#header-img {
+		display: block;
+		margin: 0;
+	}
+}
+
+#header-img.default-header {
+	margin: 0;
+	vertical-align: inherit;
+	position: absolute;
+	left: 20px;
+	bottom: $tabmenuHeight;
+	z-index: 1;
+}
+
+.pagename {
+	margin: auto;
+	font: normal 3rem/1 arial, sans-serif;
+	text-rendering: optimizeLegibility;
+	text-shadow: 0 0px 10px rgba(0,0,0,0.3);
+	color: white;
+	height: 3rem;
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
+
+	a {
+		display: inline-block;
+		color: inherit;
+		text-transform: uppercase;
+		font-weight: bold;
+		border-bottom: 2px solid transparent;
+
+		&:hover {
+			text-decoration: none;
+			border-color: white;
+		}
+	}
+}
+
+#header-bottom-right {
+	position: fixed;
+	box-sizing: border-box;
+	top: 0;
+	right: 0;
+	bottom: auto;
+	left: auto;
+	width: $sidebarWidth;
+	height: $userbarHeight;
+	padding: 0 5px 0 0;
+	font-size: 1.1rem;
+	line-height: $userbarHeight - 1;
+	text-align: right;
+	border-width: 0 0 1px 1px;
+	border-style: solid;
+	border-color: hsla(0,0%,0%,.12);
+	color: hsl(0,0%,0%);
+	background: hsl(0, 0%, 100%);
+	border-radius: 0;
+	z-index: 2;
+
+	.separator {
+		margin: 0;
+		visibility: hidden;
+	}
+
+	a {
+		color: hsl(0,0%,0%);
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	#userbarToggle {
+		height: auto;
+		min-height: 0;
+		padding: 0 5px;
+		width: auto;
+		left: 0;
+		bottom: auto;
+		font-size: 16px;
+		line-height: $userbarHeight - 1;
+		vertical-align: middle;
+		border: none;
+		border-radius: 0;
+		color: hsl(0,0%,0%);
+		background: inherit;
+	}
+
+	.user {
+		color: transparent;
+	}
+
+	.userkarma {
+		position: absolute;
+		top: 22px;
+		right: 5px;
+		font-weight: normal;
+		color: hsl(0,0%,60%);
+		cursor: help;
+
+		a {
+			color: inherit;
+		}
+	}
+
+	#RESAccountSwitcherIcon {
+		margin-right: -10px; // cover empty brackets
+		position: relative; // z-index
+	}
+
+	&.res-userbar-toggle>.user {
+		margin-left: 5px;
+	}
+
+	.gearIcon::after {
+		font-size: 16px;
+		color: hsl(0,0%,0%);
+		text-shadow: none;
+		opacity: .6;
+	}
+
+	#mail {
+		color: transparent !important;
+
+		&.nohavemail {
+			opacity: .6;
+			background-image: url(%%sprite%%);
+			background-position: -19px -87px;
+		}
+	}
+
+	#modmail {
+		color: transparent !important;
+		font-size: 0;
+		background-image: url(%%sprite%%);
+		top: auto;
+		margin: 0;
+		vertical-align: middle;
+
+		&.nohavemail {
+			opacity: .6;
+			background-position: -18px -68px;
+		}
+
+		&.havemail {
+			background-position: -34px -68px;
+		}
+	}
+
+	.pref-lang {
+		opacity: .6;
+		@extend %textToIcon;
+		background-image: url(%%sprite%%);
+		background-position: -18px -52px;
+		position: relative;
+
+		&:hover:after {
+			content: "Reddit preferences";
+		}
+	}
+
+	.logout a {
+		opacity: .6;
+		@extend %textToIcon;
+		background-image: url(%%sprite%%);
+		background-position: -18px -36px;
+		position: relative;
+
+		&:hover:after {
+			content: "Logout";
+		}
+	}
+
+	.pref-lang:after,
+	.logout a:after {
+		position: absolute;
+		top: 24px;
+		right: 1px;
+		display: inline-block;
+		color: black;
+		padding: 5px;
+		border: 1px solid hsla(0,0%,0%,.12);
+		background: hsl(0,0%,100%);
+		box-shadow: $shadow-2dp;
+		font-size: 1.3rem;
+	}
+
+	#mail.nohavemail:hover,
+	#modmail.nohavemail:hover,
+	.pref-lang:hover,
+	.logout a:hover,
+	.gearIcon:hover::after {
+		opacity: 1;
+	}
+
+	.message-count {
+		color: black;
+		display: inline;
+	}
+}
+
+.side {
+	position: relative;
+	margin: (-$headerHeight + $userbarHeight) 0 0 0;
+	padding: 40px 10px 0 10px;
+	border-width: 0 0 1px 1px;
+	border-style: solid;
+	border-color: hsl(0,0%,88%);
+	background: $sidebar;
+	width: $sidebarWidth;
+	box-sizing: border-box;
+
+	.subscribe-button a.active {
+		@extend %buttonRaised;
+		margin: 0px 5px 5px 0px;
+		padding: 0 12px;
+		font-size: 1.1rem;
+		background-color: hsl(0,0%,50%);
+		display: block;
+		overflow: visible;
+	}
+
+	.subscribe-button a.active:not(.remove) {
+		background-color: $subscribeBtn;
+	}
+
+	.subButtons {
+		@extend %flexbox;
+		border-width: 10px 0 10px 0;
+		border-style: solid;
+		border-color: transparent;
+
+		span {
+			width: 100%;
+			margin: 0;
+			box-sizing: border-box;
+
+			&.res-fancy-toggle-button {
+				@extend %buttonRaised;
+				margin: 0px 5px 5px 0px;
+				padding: 0;
+				font-size: 1.1rem;
+				display: block;
+				color: black;
+				background: hsl(0,0%,100%);
+
+				&.remove {
+					background: none;
+					box-shadow: none;
+				}
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+
+		&+.subscribers,
+		&+.subscribers + .users-online {
+			font-size: 1.2rem;
+		}
+
+		.subscribe-button a.active {
+			padding: 0;
+		}
+	}
+
+	.usertext {
+		@extend %sheet;
+		margin: 10px 0;
+		padding: 10px;
+	}
+
+	.md {
+
+
+		a:link {
+
+		}
+
+		a:visited {
+
+		}
+	}
+
+	// side search
+	#search {
+		position: relative;
+		margin: 0 0 10px;
+
+		input[type=text] {
+			width: $sidebarWidth - 20;
+			padding: 8px 8px 8px 5px;
+			border: none;
+			box-shadow: 0 0 0 1px hsla(0,0%,0%,.12);
+			background: hsl(0,0%,100%);
+			transition: all .2s;
+
+			&:hover,
+			&:focus {
+				box-shadow: 0 0 0 1px hsla(0,0%,0%,.32);
+				outline: none;
+			}
+		}
+
+		input[type=submit] {
+			width: 30px;
+			height: 30px;
+			margin-left: -30px;
+			opacity: .5;
+			background: url(%%sprite%%) no-repeat -13px 9px;
+
+			&:hover {
+				background: url(%%sprite%%) no-repeat -13px 9px;
+			}
+		}
+
+		#searchexpando {
+			margin: 0px 0 0 0;
+			padding: 20px 10px 0 10px;
+			border: 1px solid hsla(0,0%,0%,.12);
+			background: hsl(0,0%,100%);
+			border-radius: 0;
+			box-shadow: $shadow-8dp;
+			position: absolute;
+			width: $sidebarWidth - 20;
+			box-sizing: border-box;
+			z-index: 2147483647;
+		}
+
+		#search_showmore:after {
+			display: inline-block;
+			margin: 1rem 0;
+		}
+
+		// Improve search expando UI.
+		#moresearchinfo {
+			padding: 20px 0 20px 0;
+			border-width: 0;
+			position: relative;
+
+			&+p {
+				margin: 10px 0 0 0;
+
+				a {
+					line-height: 0;
+					font-size: 0;
+
+					&:after {
+						text-indent: 0;
+						height: auto;
+						line-height: 1;
+						content: "More options...";
+						font-size: 12px;
+					}
+				}
+			}
+
+			p:first-of-type {
+				font-weight: bold;
+				line-height: 1;
+			}
+
+			#search_hidemore {
+				display: block;
+				color: transparent;
+				float: none;
+				text-align: center;
+				margin: 0 -10px 0px -10px;
+				padding: 0;
+				position: absolute;
+				top: auto; right: 0; bottom: 0; left: 0;
+				font-size: 0;
+				line-height: 0;
+				border-bottom: 5px solid #F44336;
+
+				&:after {
+					content: "";
+					display: inline-block;
+					border: 8px solid transparent;
+					border-bottom-color: #F44336;
+				}
+			}
+		}
+
+		dt {
+			font-weight: normal;
+			margin-left: 0;
+		}
+		dd {
+			margin: 0 0 5px;
+			color: rgb(150,150,150);
+		}
+	}
+
+	// the spacer divs can be a nuisance, so make them do nothing
+	&>.spacer {
+		display: inline;
+	}
+
+	.linkinfo {
+		padding: 10px;
+		@extend %sheet;
+		color: black;
+		line-height: 1.5;
+		font-family: verdana, sans-serif;
+
+		.shortlink,
+		.shortlink input,
+		.score .number,
+		.score .word {
+				font-size: inherit;
+		}
+
+		.shortlink input {
+			color: inherit;
+			background: none;
+			border-color: hsla(0,0%,0%,.12);
+		}
+	}
+
+	.tagline {
+
+	}
+
+	.discuss-ad {
+		color: hsl(0,0%,60%);
+		font-size: 10px;
+		text-align: right;
+	}
+
+	td, th {
+
+	}
+}
+
+#moderation_tools {
+
+	li {
+		padding: 0;
+		margin: 0;
+
+		a {
+			display: block;
+			padding: 3px 0;
+
+			&:before {
+				display: inline-block !important;
+				float: none !important;
+				vertical-align: middle;
+			}
+		}
+	}
+}
+
+// Create our own spacing between sideboxes
+#login_login-main,
+#moderation_tools,
+#ad_main,
+.sidebox.create,
+.sidecontentbox,
+.account-activity-box,
+.linkinfo,
+.titlebox {
+	margin: 20px 0;
+	clear: both;
+}
+
+.sidecontentbox {
+	@extend %sheet;
+	padding: 10px;
+
+	.content {
+		border: none;
+		padding: 10px 0;
+
+		li {
+			padding: 2px 0;
+		}
+	}
+
+	.linkflairlabel {
+		display: none;
+	}
+}
+
+.sidebox {
+
+	&.submit {
+
+	}
+
+	&:not(.create) .morelink {
+		border: none;
+		background: none;
+		height: auto;
+		margin: 10px 0;
+		letter-spacing: 0;
+
+		a {
+			@extend %buttonRaised;
+			font-size: 1.4rem;
+			margin: 0;
+			display: block;
+			height: auto;
+			width: auto;
+			position: relative;
+			text-align: left;
+			padding-left: 40px;
+
+			&:before {
+				content: "";
+				position: absolute;
+				width: 24px;
+				height: 24px;
+				top: 4px;
+				left: 6px;
+				background: url(%%sprite%%) 0 -145px no-repeat;
+				opacity: .6;
+			}
+		}
+
+		&:hover {
+			background: none;
+		}
+	}
+
+	&.submit-text .morelink a:before {
+		background-position: 0 -169px;
+		top: 1px;
+	}
+
+	.spacer {
+		@extend %sheet;
+	}
+
+	&.submit.disabled {
+
+		.morelink {
+
+			a {
+				background: none;
+				color: hsl(0,0%,50%);
+				box-shadow: none;
+				border: 1px solid hsla(0,0%,0%,.12);
+
+				&:before {
+					content: none;
+				}
+			}
+		}
+
+		.spacer {
+			border: none;
+			background: none;
+		}
+	}
+
+	.morelink .nub,
+	.morelink:hover .nub{
+		display: none;
+	}
+}
+
+.titlebox {
+	margin-left: 0;
+	margin-right: 0;
+	background: transparent;
+
+	.subscribers,
+	.users-online {
+		display: inline-block;
+		font-size: 1.1rem;
+		font-family: arial, sans-serif;
+		vertical-align: baseline;
+		margin-top: 0;
+		margin-bottom: 10px;
+	}
+
+	.subscribers {
+		margin-right: 1rem;
+	}
+
+	.users-online {
+
+		&:before {
+			content: none;
+		}
+
+		.number:after {
+			content: " here now";
+		}
+		.word {
+			display: none;
+		}
+	}
+
+	.bottom {
+		color: hsla(0,0%,0%,.6);
+		border: none;
+		padding: 10px 0 0 0;
+
+		a {
+			color: inherit;
+		}
+	}
+
+	h1.redditname {
+		position: absolute;
+		top: 10px;
+		color: black;
+		margin: 0;
+		font: normal 2rem/1 arial, sans-serif;
+		overflow: visible;
+		width: 300px;
+	}
+
+	h1.redditname a {
+		color: inherit;
+
+		&:before {
+			content: '/r/';
+		}
+	}
+
+	h1.redditname + div {
+		text-align: center;
+	}
+}
+
+.titlebox form.toggle,
+.leavemoderator {
+	font-size: 1.1rem;
+	color: hsl(0,0%,30%);
+	background: none;
+	padding: 10px 0 0 0;
+	clear: left;
+}
+.link .usertext-body .md {
+	border: none;
+	background: none;
+	border-radius: 0;
+	padding: 0 0 10px;
+}
+.usertext-body > .md {
+	padding-right: 0;
+}
+
+body > .content {
+	margin: 0 $sidebarWidth 0 0;
+	padding: 10px;
+	background: hsl(0,0%,100%);
+	z-index: 1;
+}
+
+.content .spacer {
+	margin: 0;
+}
+
+.footer-parent {
+	clear: none;
+	margin-right: $sidebarWidth;
+}
+
+// content
+
+.link {
+	margin: 0 0 0 0;
+	padding: 8px 8px 0 8px;
+
+	.flat-list {
+		padding: 0;
+		margin-bottom: 8px;
+	}
+
+	.entry {
+		overflow: visible;
+		margin-left: 64px;
+	}
+
+	.title {
+		font: 1.8rem/1.1 arial, sans-serif;
+		text-rendering: optimizeLegibility;
+		margin: 0;
+
+		&+.expando-button {
+			margin: 7px 5px 0 0;
+		}
+	}
+
+	.midcol {
+		font-weight: normal;
+		margin-top: 1px;
+	}
+
+	.tagline {
+		margin: 2px 0;
+
+		&:first-letter {
+			text-transform: capitalize;
+		}
+	}
+
+	.rank {
+		position: absolute;
+		left: 2px;
+		margin-top: 20px;
+		font-size: 1.2rem;
+	}
+
+	.score {
+		color: hsl(0,0%,50%);
+	}
+
+	.expando {
+		position: relative; // place over sidebar
+	}
+}
+
+body.comments-page .link a.title {
+	font-size: 2.2rem;
+}
+
+body.listing-page .link .entry,
+.commentarea .linklisting .link .entry {
+	border-bottom: 1px solid hsl(0,0%,88%);
+}
+
+// Handle links that have thumbnails
+@media (min-width: $smallViewport) {
+	.link .thumbnail + .entry {
+		margin-left: 165px;
+	}
+
+	body.comments-page .link:not(.self) .thumbnail:not(.default) + .entry {
+		margin-left: 210px;
+	}
+
+	// Thumbnails
+	.link .thumbnail {
+		margin-bottom: 10px;
+	}
+
+	.thing:not(.self) {
+
+		.thumbnail:not(.default):not(.nsfw) {
+			width: 90px;
+			height: 60px;
+			margin: -5px 0 10px 0;
+			position: relative;
+		}
+
+		.thumbnail:not(.default) img {
+			width: 90px;
+			height: auto;
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		&:not([data-domain="reddit.com"]) .thumbnail:not(.default):hover img {
+			width: 140px;
+			top: -30px;
+			left: -25px;
+		}
+	}
+
+	body.comments-page .thing:not(.self):not([data-domain="reddit.com"]) .thumbnail:not(.default) {
+		width: auto;
+		height: auto;
+		margin: 0 10px 0 0;
+		position: static;
+	}
+
+	body.comments-page .thing:not(.self):not([data-domain="reddit.com"]) .thumbnail:not(.default) img {
+		width: auto;
+		position: static;
+	}
+
+	.link div.madeVisible {
+		overflow: visible;
+		position: relative;
+		background: white;
+		margin-bottom: 10px;
+	}
+
+	.link .thumbnail + .entry div.madeVisible {
+		margin-left: -101px;
+	}
+
+	body.comments-page .link .thumbnail + .entry div.madeVisible {
+		margin-left: -156px;
+	}
+
+	.thumbnail {
+
+		&.default,
+		&.nsfw,
+		&.self {
+			margin: 0 15px;
+		}
+	}
+
+	/* addon animate-thumbs */
+	.thing:not(.self) .thumbnail:not(.default) img { transition: width .1s, left .1s, top 1s .75s; }
+	/* .end */
+}
+
+div.madeVisible a.madeVisible {
+	overflow: visible;
+
+	video,
+	img {
+		display: block;
+	}
+}
+
+.error {
+	color: hsl(0,70%,50%);
+}
+
+#noresults {
+	font-size: 0;
+	text-align: center;
+	margin-right: 0;
+	color: transparent;
+
+	&:after {
+		font-size: 2rem;
+		content: "Why not add something?";
+		color: hsl(0,0%,50%);
+		display: block;
+		margin: 2rem 0;
+	}
+}
+
+.nav-buttons {
+	margin: 20px 0;
+}
+
+.thing.stickied.link a.title {
+	font-weight: normal;
+	color: $sticky;
+}
+
+body > .content .link .midcol, .midcol-spacer {
+	width: 50px !important;
+	position: relative;
+}
+.tagline {
+	line-height: 1.4;
+	transition: background .1s;
+}
+
+.tagline .stickied-tagline,
+.search-result-meta .stickied-tagline,
+.tagline .moderator,
+.green,
+.search-result-meta .moderator,
+.res-nightmode .tagline .moderator,
+.res-nightmode .tagline .moderator:visited {
+	color: $sticky;
+}
+
+.comment .tagline {
+	display: block; // RES fix
+}
+.tagline, .search-result-meta {
+	color: hsl(0,0%,20%);
+	font-size: 1.1rem;
+}
+.tagline a, .search-result-meta a {
+	color: inherit;
+}
+.entry {
+
+	.buttons {
+
+		&>li,
+		&>li+li {
+			padding: 0;
+		}
+
+		&>li {
+
+			a {
+				font-weight: normal;
+				font-size: 1.1rem;
+				color: hsl(200,15%,55%);
+				text-transform: capitalize;
+				padding: 2px 6px;
+				border-radius: 3px;
+
+				&:hover {
+					color: black;
+					text-decoration: none;
+				}
+			}
+
+			&:first-of-type a {
+				padding-left: 0;
+			}
+		}
+	}
+}
+// Remove margins meant for sidebar
+.panestack-title {
+	margin: 10px -10px;
+	padding: 15px 20px 10px 20px;
+	border-top: 1px solid hsl(0, 0%, 88%);
+	border-bottom: none;
+	text-transform: capitalize;
+}
+.wiki-page {
+
+	.wikititle,
+	.pageactions {
+		display: inline-block;
+		margin: 0 10px 15px 0;
+	}
+
+	.wiki-page-content {
+		margin: 0;
+	}
+}
+
+.wiki-page-content .md pre {
+	border-color: hsl(0,0%,80%);
+}
+
+.commentarea .menuarea,
+.sheets {
+	margin-right: 0;
+}
+.gold-accent.comment-visits-box {
+	max-width: none !important;
+	display: block;
+}
+
+// RES pinHeader
+body.pinHeader-sub div#header-bottom-right {
+	top: 22px !important;
+	opacity: .8;
+}
+
+body.pinHeader-userbar #header-bottom-right {
+	height: 22px;
+}
+
+body.pinHeader-subanduser #header-bottom-right {
+	height: 22px;
+	top: 22px;
+}
+
+div.imgCaptions,
+.md div.imgCaptions {
+	white-space: normal;
+}
+
+// selectedEntry
+.entry.RES-keyNav-activeElement,
+.entry.RES-keyNav-activeElement .md-container {
+	background-color: transparent !important;
+}
+.entry.RES-keyNav-activeElement .tagline,
+.thing.morechildren .entry.RES-keyNav-activeElement {
+	color: black;
+	background-color: hsla(0,0%,0%,.12) !important;
+	border-radius: 5px;
+}
+
+// Headings
+.md h1,
+.md h2,
+.md h3,
+.md h4,
+.md h5,
+.md h6,
+.side .md h1,
+.side .md h2,
+.side .md h3,
+.side .md h4,
+.side .md h5,
+.side .md h6,
+.wiki-page-content .md h1,
+.wiki-page-content .md h2,
+.wiki-page-content .md h3,
+.wiki-page-content .md h4,
+.wiki-page-content .md h5,
+.wiki-page-content .md h6,
+h2#wiki_heading_2 {
+	color: inherit;
+	font-weight: normal;
+	font-family: tahoma, arial, sans-serif;
+	line-height: 1;
+	margin: 1.2em 0 .5em;
+}
+.md h1 {
+	font-size: 2rem;
+}
+.side .md h1, .wiki-page-content .md h1 {
+	font-size: 2.25rem;
+	margin: .5em 0 .5em;
+}
+.side .md h2, .wiki-page-content .md h2 {
+	font-size: 2rem;
+}
+.side .md h3, .wiki-page-content .md h3 {
+	font-size: 1.75rem;
+	font-weight: normal;
+}
+.side .md h4, .wiki-page-content .md h4 {
+	font-size: 1.6rem;
+	font-style: normal;
+}
+.side .md h5, .wiki-page-content .md h5 {
+	font-size: 1.4rem;
+	text-decoration: none;
+}
+.side .md h6, .wiki-page-content .md h6 {
+	font-size: 1.3rem;
+	text-decoration: none;
+	text-transform: none;
+}
+
+.side .md {
+
+	ul {
+		padding-left: 16px;
+	}
+
+	ul,
+	ol {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	ul li,
+	ol li {
+		line-height: 1.6;
+	}
+
+	p {
+		line-height: 1.6;
+	}
+}
+
+/* addon blockquote-cards */
+.side .md > blockquote {
+	margin: 16px 0;
+	padding: 10px;
+	border-width: 0 0 3px 0;
+	background: $card;
+	border-radius: 3px;
+	border-style: solid;
+	border-color: hsla(0,0%,0%,.18);
+	color: white;
+	background-image: linear-gradient(-13deg,rgba(255,255,255,0) 50%,rgba(255,255,255,0.1) 51%);
+
+	h2 {
+		margin: 0 0 10px 0;
+	}
+
+	a, a:visited {
+		color: white;
+		border-bottom: 1px solid hsla(0,0%,100%,.4);
+
+		&:hover {
+			border-bottom-color: hsla(0,0%,100%,.8);
+			text-decoration: none;
+		}
+	}
+
+	a[title="click"] {
+		color: black;
+		background-color: white;
+	}
+}
+.side .md {
+
+	&>h1 + blockquote {
+		background-color: hsl(0,0%,30%);
+	}
+
+	&>h2 + blockquote {
+		background-color: hsl(0,70%,45%);
+	}
+
+	&>h3 + blockquote {
+		background-color: hsl(30, 90%, 45%);
+	}
+
+	&>h4 + blockquote {
+		background-color: hsl(320,70%,45%);
+	}
+
+	&>h5 + blockquote {
+		background-color: hsl(270,70%,45%);
+	}
+
+	&>h6 + blockquote {
+		background-color: hsl(140,70%,45%);
+	}
+}
+/* .end */
+
+.link .usertext .usertext-edit > .md {
+	padding-left: 0;
+}
+.usertext .bottom-area {
+	overflow: visible;
+	width: auto;
+	min-height: 32px;
+}
+.usertext .help-toggle,
+.usertext a.reddiquette {
+	line-height: 32px;
+	margin: 0 5px;
+}
+.usertext .help-toggle a,
+.usertext a.reddiquette {
+	color: hsl(0,0%,60%);
+}
+body:not(.submit-page) .usertext-buttons {
+	padding-bottom: 7px;
+}
+.usertext-buttons .status {
+	font-size: 1rem;
+}
+
+/* addon side-menu */
+.side .md > h5 + ul {
+	margin: 8px -10px 16px -10px;
+	padding: 0;
+	list-style: none;
+	font-size: 1.4rem;
+	cursor: default;
+
+	&>li {
+		padding: 6px 8px 6px 24px;
+		position: relative;
+		transition: background .1s;
+
+		&:hover > ul {
+			visibility: visible;
+			opacity: 1;
+			right: $sidebarWidth - 24px;
+		}
+
+		&>sup,
+		&>p sup {
+			position: absolute;
+			top: 11px;
+			left: 8px;
+			display: block;
+			overflow: hidden;
+			text-indent: -1000px;
+			width: 10px;
+			height: 12px;
+			opacity: .4;
+			background-position: -20px -22px;
+			background-image: url(%%sprite%%);
+			pointer-events: none;
+		}
+
+		&:hover > sup,
+		&:hover > p sup {
+
+		}
+
+		&>p,
+		&>ul > li > p {
+			margin: 0;
+		}
+
+		&>a,
+		&>p > a {
+			color: $linkDefault;
+			display: block;
+			margin: -6px -8px -6px -32px;
+			padding: 6px 8px 6px 32px;
+			white-space: nowrap;
+			overflow-x: hidden;
+			text-overflow: ellipsis;
+			text-decoration: none;
+		}
+
+		&:hover,
+		&>ul > li:hover > a {
+			background: hsl(0,0%,93%);
+		}
+
+		&:hover > p > a,
+		&>ul > li > a:hover,
+		&>ul > li > p a:hover {
+			color: $linkDefault;
+			text-decoration: none;
+		}
+
+		&>ul {
+			visibility: hidden;
+			opacity: 0;
+			position: absolute;
+			top: 0px;
+			right: $sidebarWidth - 28px;
+			width: 300px;
+			max-height: 700px;
+			overflow-y: auto;
+			list-style: none;
+			margin: 0;
+			padding: 8px 0;
+			z-index: 101;
+			border: 1px solid hsla(0,0%,0%,.12);
+			background: hsl(0,0%,100%);
+			box-shadow: $shadow-8dp;
+			transition-property: visibility opacity;
+			transition-duration: .2s;
+			transition-delay: .12s;
+
+			&>li {
+				padding: 6px 8px;
+
+				&>a,
+				&>p a {
+					color: $linkDefault;
+					display: block;
+					margin: -6px -8px;
+					padding: 6px 8px;
+				}
+			}
+		}
+	}
+}
+/* .end */
+
+body.submit-page {
+
+	&>.content {
+		border: none;
+		background: none;
+		padding: 0;
+	}
+
+	.formtabs-content {
+  	width: auto;
+
+		.roundfield {
+			max-width: 520px;
+			width: auto;
+			box-sizing: border-box;
+			background-color: hsl(0,0%,93%);
+		}
+
+		.submit_text > h1 {
+			display: none;
+		}
+	}
+
+	&:not(.res-nightmode) .formtabs-content .submit_text {
+		padding: 20px 10px;
+	}
+
+	form .spacer:first-of-type,
+	form .spacer:last-of-type {
+		margin: 0 auto 15px auto;
+		width: 520px;
+	}
+}
+
+ul.tabmenu.formtab {
+	margin: 0 0 5px;
+	padding: 0;
+	font-size: 1.3rem;
+	text-transform: uppercase;
+	text-align: center;
+
+	li {
+		display: inline-block;
+
+		&.selected a {
+			font-size: inherit;
+			background: none;
+			color: inherit;
+			border-bottom: 2px solid;
+		}
+	}
+
+	a {
+		display: block;
+		padding: 5px 15px;
+		border: none;
+		color: hsl(0,0%,50%);
+		background: none;
+
+		&:hover {
+			color: inherit;
+		}
+	}
+}
+
+.formtabs-content {
+	border-top: none;
+
+	.roundfield {
+		border-radius: 0;
+
+		.usertext-edit {
+			width: auto;
+		}
+	}
+}
+
+.submit_text.enabled {
+	display: block;
+	max-height: 500px;
+}
+
+.roundfield,
+.linefield {
+	margin: 1px auto;
+	padding: 5px 10px 15px;
+}
+
+div.save-button,
+form.submit > .spacer {
+	margin: 20px auto;
+	width: 520px;
+}
+
+.create-reddit .linefield:nth-of-type(3) .usertext::before {
+	content: 'h5 followed by "* text" = menu | > = card | [text](/r/a "click") = button';
+	display: block;
+	margin: 10px -22px;
+	padding: 5px;
+	color: white;
+	font: 1.2rem/1.2 consolas, monospace;
+	background: hsl(0,0%,30%);
+	text-align: center;
+}
+
+.organic-listing.loading {
+	display: none; // improves perceived load time
+}
+
+// horizontal rules
+.md hr, hr {
+	height: 1px;
+	margin: 10px 0px;
+	border: none;
+	background: hsla(0, 0%, 0%, .12);
+}
+
+.side .md {
+
+	hr {
+		margin: 10px -10px;
+		background: hsla(0,0%,0%,.12);
+	}
+
+	&>blockquote hr {
+		width: auto;
+		background: hsla(0,0%,100%,.12);
+	}
+}
+
+/* addon flair-basic */
+.flair {
+	padding: 0 5px;
+	font-size: inherit;
+	font-style: italic;
+	border: none;
+	color: inherit;
+	background: none;
+	max-width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	vertical-align: bottom;
+}
+.linkflairlabel {
+	padding: 0 0px 0 0;
+	max-width: 150px;
+	font-size: 1.2rem;
+	font-family: "arial black", sans-serif;
+	font-weight: 900; // Firefox fix for arial black
+	color: hsl(200,20%,60%);
+	border: none;
+	background: none;
+	line-height: 1;
+	vertical-align: middle;
+	text-transform: uppercase;
+}
+.title + .linkflairlabel {
+	padding: 0 0 0 5px;
+}
+/* .end */
+
+.commentarea {
+
+	.menuarea {
+		margin-right: 0;
+		color: hsl(0,0%,70%);
+
+		&>div:hover {
+			color: black;
+		}
+	}
+
+	&>.usertext {
+		margin: 0 -10px 20px;
+		padding: 10px 10px 7px 20px;
+	}
+}
+
+#REScommentNavToggle {
+	display: inline;
+	padding-left: 1rem;
+
+	&>.commentNavSortType {
+		font-weight: normal;
+		color: hsl(0,0%,40%);
+		border: none;
+		margin: 0 5px;
+		padding: 0;
+	}
+
+	&>span:not(:first-of-type) {
+		display: none;
+	}
+}
+
+body.moderator #REScommentNavToggle {
+	display: block;
+	padding: 1em 0 0;
+}
+
+.infobar {
+	margin: 10px 0;
+	padding: 10px;
+	border-color: hsl(50, 70%, 70%);
+	background: hsl(50, 90%, 90%);
+}
+
+.domain {
+	font-family: verdana, sans-serif;
+	color: transparent;
+	vertical-align: middle;
+
+	a {
+		color: hsl(0,0%,60%);
+
+		&:hover {
+			color: hsl(0,0%,20%);
+			text-decoration: none;
+		}
+	}
+}
+
+.hover-bubble {
+	border: 1px solid hsla(0,0%,0%,.12);
+	box-shadow: $shadow-8dp;
+
+	&.anchor-right:before {
+		border-left-color: hsla(0, 0%, 0%,.12);
+	}
+
+	&.multi-selector {
+
+		.title {
+			padding: 5px 12px;
+		}
+
+		strong,
+		a.sr {
+			font-weight: normal;
+			text-align: left;
+			font-size: 1.2rem;
+			margin: 0;
+		}
+
+		strong {
+			font-size: 1.8rem;
+			line-height: 1.4;
+			text-transform: capitalize;
+		}
+
+		a.sr {
+			display: inline;
+			color: hsl(0,0%,60%);
+		}
+
+		.throbber {
+			opacity: .2;
+		}
+	}
+}
+
+.subreddit-rules-page {
+	max-width: none;
+
+	.subreddit-rule-item {
+		border-top: 1px solid hsl(0,0%,88%);
+
+		&:hover {
+			background: none;
+		}
+	}
+
+	&:before {
+		top: auto;
+	}
+}
+
+.subreddit-rule-form .c-form-group {
+
+	.label,
+	.text-counter {
+		color: inherit;
+	}
+}
+
+.login-form-side {
+	@extend %sheet;
+	padding: 10px;
+
+	input[type=text],
+	input[type=password] {
+		box-sizing: border-box;
+		border-color: hsla(0,0%,0%,.12);
+		margin: 0;
+		width: 136px;
+	}
+
+	input[type=text] {
+		margin-right: 5px;
+	}
+
+	.submit {
+		margin-right: 0;
+	}
+}
+
+ul#image-preview-list {
+	margin-right: 0;
+	font-size: 1.2rem;
+
+	li {
+		margin-bottom: 0;
+		width: 50%;
+		height: auto;
+		float: none;
+		display: inline-block;
+	}
+}
+
+// Hide redundant headings
+body.submit-page > div.content > h1,
+.searchpane h4,
+body.submit-page .formtabs-content .spacer:last-of-type .title {
+	display: none;
+}
+
+#reddit-field .title {
+	font-size: 0;
+	line-height: 0;
+
+	&:after {
+		content: "subreddit";
+		font-size: large;
+		line-height: 1;
+	}
+}
+
+// Buttons
+.side .md > p a[title="click"],
+.side .md blockquote a[title="click"],
+.usertext-buttons button.save,
+.BEFoot button:first-child,
+.spacer > button {
+	@extend %buttonRaised;
+}
+
+.content .RESBigEditorPop,
+.usertext button.cancel,
+#url-field button,
+.BEFoot button:last-child  {
+	@extend %buttonFlat;
+}
+
+.usertext button {
+	margin: 0;
+}
+
+.content .RESBigEditorPop {
+	margin-top: 0;
+}
+
+body.with-listing-chooser {
+
+	.listing-chooser {
+		z-index: 100;
+		border-radius: 0 10px 0 0;
+	}
+
+	#header .tabmenu {
+		margin-left: 0;
+	}
+}
+
+body.res {
+
+	.RESDropdownList {
+		width: 200px;
+		border-radius: 0;
+		border: 1px solid hsla(0,0%,0%,.12);
+		color: black;
+		background-color: hsl(0, 0%, 100%);
+		box-shadow: $shadow-8dp;
+
+		li {
+			font-weight: normal;
+			font-size: 1.2rem;
+			line-height: 1.5;
+			height: auto;
+			padding: 6px 10px;
+			width: auto;
+			border: none;
+		}
+
+		li,
+		li:hover,
+		a,
+		a:visited {
+			color: inherit;
+		}
+
+		li:hover,
+		li a:hover {
+			color: inherit;
+			background-color: hsl(0, 0%, 93%);
+		}
+
+		.RESMenuItemButton {
+			position: static;
+			margin-left: -100%;
+			float: right;
+
+			&:hover {
+				color: inherit;
+				background-color: hsl(0, 0%, 93%);
+			}
+		}
+	}
+
+	.res-floater-visibleAfterScroll {
+		top: auto;
+		bottom: 0;
+
+		#NREMail, #NREMailCount {
+			display: none;
+		}
+	}
+
+	#progressIndicator {
+		font-size: 1.2rem;
+		width: auto;
+		margin: 20px 0px 10px 0px;
+		color: black;
+		border-color: hsl(0,0%,85%);
+		background-color: hsl(0,0%,97%);
+
+		h2 {
+			display: none;
+		}
+		&:hover {
+			background-color: transparent;
+		}
+	}
+
+	.NERPageMarker {
+		font-size: 1.2rem;
+		width: auto;
+		margin: 20px 0px 10px 0px;
+		line-height: 1.4;
+		color: hsl(0,0%,100%);
+		border-color: transparent;
+		background-color: hsl(250,5%,30%);
+	}
+}
+
+.md {
+
+	pre {
+		margin-left: 15px;
+		border: 1px solid hsla(0,0%,0%,.12);
+	}
+}
+
+.link .md pre {
+		background-color: hsla(0,0%,0%,.07);
+}
+
+.arrow {
+	&.up,
+	&.upmod,
+	&.down,
+	&.downmod {
+		width: 16px !important;
+		height: 16px !important;
+		background-image: url(%%sprite%%) !important;
+		background-repeat: no-repeat;
+	}
+
+	&.up { background-position: -16px -100px !important; }
+	&.up:hover { background-position: -16px -100px !important; }
+	&.upmod { background-position: -32px -100px !important; }
+	&.down { background-position: -16px -117px !important; }
+	&.down:hover { background-position: -16px -117px !important; }
+	&.downmod { background-position: -32px -117px !important; }
+}
+
+// Less than large viewport
+@media (max-width: $largeViewport) {
+	#sr-header-area {
+		right: 0;
+	}
+
+	#header {
+		margin-right: 0;
+
+		#header-bottom-right {
+			position: absolute;
+			width: auto;
+			padding-left: 15px;
+			border: none;
+			background: rgba(0, 0, 0, .5);
+			border-radius: 0 0 0 5px;
+			color: white;
+			transition: background .2s;
+
+			&:hover {
+				background: hsla(0,0%,0%,.9);
+			}
+
+			#userbarToggle {
+				background: transparent;
+				color: white;
+			}
+
+			a {
+				color: white;
+			}
+
+			.userkarma {
+				position: static;
+				color: hsl(0,0%,100%);
+			}
+
+			#RESAccountSwitcherIcon {
+				margin-right: 0;
+			}
+
+			#mail {
+
+				&.nohavemail {
+					background-position: 0px -87px;
+				}
+			}
+
+			#modmail {
+
+				&.nohavemail {
+					background-position: -0px -68px;
+				}
+
+				&.havemail {
+					background-position: -34px -68px;
+				}
+			}
+
+			.pref-lang {
+				background-position: -0px -52px;
+			}
+
+			.gearIcon::after {
+				color: hsl(0,0%,100%);
+			}
+
+			.logout a {
+				background-position: -0px -36px;
+			}
+		}
+	}
+
+	.side {
+		margin-top: 0;
+	}
+
+	body.res {
+
+		.res-floater-visibleAfterScroll {
+
+			#NREMail, #NREMailCount {
+				display: inline-block;
+			}
+		}
+	}
+}
+
+.RESDialogSmall {
+
+	&> h3 {
+		z-index: auto; // RES fix.
+	}
+}
+
+/* addon banner-credit */
+#header-bottom-left:after {
+	content: none;
+	position: absolute;
+	right: 0;
+	bottom: $tabmenuHeight;
+	font: 1.1rem/1.5 monospace;
+	padding: 0 3px;
+	background: hsla(0,0%,0%,.2);
+	color: white;
+}
+/* .end */
+
+/* addon expandos */
+.expando-button {
+	position: relative;
+	color: transparent !important; // RES fix.
+	cursor: default;
+
+	&:before {
+		content: "";
+		position: absolute;
+		width: 7px;
+		height: 8px;
+		right: 3px;
+		bottom: 2px;
+		background: white;
+	}
+
+	&:after {
+		content: "";
+		position: absolute;
+		right: 2px;
+		bottom: 2px;
+		width: 9px;
+		height: 9px;
+		background: url(%%sprite%%) -16px -135px no-repeat;
+		transition: transform .2s ease-in-out;
+	}
+
+	&.expanded:after {
+		@include transform(rotate(45deg));
+		background-position: -16px -135px;
+	}
+
+	&:hover:after {
+		background-position: -3px -135px;
+	}
+
+	&:hover:before {
+		background-color: #369;
+	}
+}
+
+.md .expando-button {
+	margin: 0 2px;
+}
+/* .end */
+
+/*addon flair-selector*/
+.flairselector.drop-choices.active {
+	border: 1px solid hsla(0,0%,0%,.12);
+	padding: 0 !important;
+	box-shadow: $shadow-8dp;
+}
+
+.flairoptionpane {
+	text-align: left;
+	margin: 10px 0;
+}
+
+.flairselector {
+
+	h2 {
+		margin: 0 0 10px;
+		padding: 5px;
+		font: 1.6rem/1 arial, sans-serif;
+		text-align: left;
+		color: black;
+		background: transparent;
+	}
+
+	.flairoptionpane {
+
+		ul {
+			width: auto !important;
+			max-width: none;
+			display: block;
+
+			li {
+				padding: 5px;
+
+				&.selected {
+					border: none;
+					background: hsla(0,0%,0%,.12);
+				}
+			}
+		}
+	}
+
+	form {
+		border: none;
+		padding: 5px;
+		text-align: left;
+		white-space: normal;
+
+		.flairremove {
+			margin: 0 0 10px 0;
+			color: transparent;
+
+			a {
+				color: crimson;
+				padding: 0;
+			}
+		}
+
+		.linkflair, .flair {
+			display: none;
+		}
+
+		button {
+			margin: 0 8px 0 0;
+		}
+	}
+
+	li {
+		padding: 3px 0;
+
+		&:hover {
+			border: none;
+			background: hsla(0,0%,0%,.09);
+		}
+	}
+
+	.status {
+		font-size: 1.1rem;
+	}
+}
+
+.entry .buttons .flairselector .title {
+	font-size: 1.2rem !important;
+	color: black !important;
+	padding: 0;
+}
+/*.end*/
+
+// Hide the sidebar on small screens.
+@media (max-width: $smallViewport) {
+	body {
+		overflow-x: hidden !important;
+
+		&>.content {
+			margin-right: 30px;
+		}
+	}
+
+	#header .tabmenu #viewImagesButton {
+		position: static;
+		font: inherit;
+	}
+
+	// Compensate for smaller thumbnails.
+	.link .thumbnail + .entry .tagline {
+		margin-left: 75px;
+	}
+
+	.side {
+		position: absolute;
+		right: 0;
+		margin-right: -320px;
+		transition: margin-right .3s .15s ease-in-out;
+		z-index: 101;
+
+		&:before {
+			content: "<>";
+			position: fixed;
+			width: 36px;
+			text-align: center;
+			top: 49%;
+			right: -18px;
+			font: bold 24px/36px arial, sans-serif;
+			color: white;
+			background: hsl(200,100%,50%);
+			border-radius: 50%;
+			box-shadow: $shadow-8dp;
+			transition: all .3s .15s;
+			cursor: default;
+		}
+
+		&:hover {
+			margin-right: 0;
+
+			&:before {
+				right: -40px;
+			}
+		}
+	}
+
+	.footer-parent {
+		margin-right: 30px;
+	}
+}
+
+/* End of A_D stylesheet */
