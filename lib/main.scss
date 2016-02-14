@@ -6,12 +6,11 @@
  */
 
 // Colors
-$banner: hsl(0,0%,70%);
-$button:#3D446B;
-$menu:hsla(196, 91%, 40%, 0.5);
-$subscribeBtn: #0990C1;
+$banner: hsl(0,0%,50%);
+$button:hsl(0,0%,30%);
+$menu:hsl(0,0%,30%);
+$subscribeBtn: hsl(10,90%,50%);
 $sidebar: hsl(0,0%,93%);
-$card: hsla(195, 100%, 45%, 1);
 
 // Dimensions
 $headerHeight: 200px;
@@ -47,6 +46,32 @@ $sticky: hsl(140, 70%, 35%);
 }
 
 %flexbox { @include flexbox; }
+
+@mixin keyframes($animation-name) {
+	@-webkit-keyframes #{$animation-name} {
+		@content;
+	}
+	@-moz-keyframes #{$animation-name} {
+		@content;
+	}
+	@-ms-keyframes #{$animation-name} {
+		@content;
+	}
+	@-o-keyframes #{$animation-name} {
+		@content;
+	}
+	@keyframes #{$animation-name} {
+		@content;
+	}
+}
+
+@mixin animation($str) {
+	-webkit-animation: #{$str};
+	-moz-animation: #{$str};
+	-ms-animation: #{$str};
+	-o-animation: #{$str};
+	animation: #{$str};
+}
 
 %vCenter {
 	top: 50%;
@@ -110,10 +135,9 @@ $sticky: hsl(140, 70%, 35%);
 }
 
 %sheet {
-	// Use shadow instead of border for blending with backgrounds.
-	border: none;
-	box-shadow: 0 0 0 1px hsla(0,0%,0%,.12);
+	border: 1px solid hsla(0,0%,0%,.12);
 	background: hsl(0,00%,100%);
+	background-clip: padding-box;
 	border-radius: 5px;
 }
 
@@ -191,7 +215,8 @@ body {
 	#RESShortcutsEditContainer {
 		z-index: auto;
 		background: #444;
-		visibility: hidden;
+		opacity: 0;
+		transition: visibility .4s .15s;
 	}
 
 	#sr-more-link, #RESShortcutsSort, #RESShortcutsRight, #RESShortcutsLeft, #RESShortcutsAdd, #RESShortcutsTrash {
@@ -211,8 +236,7 @@ body {
 
 		a,
 		#RESShortcutsEditContainer {
-			color: hsla(0,0%,100%,.8);
-			visibility: visible;
+			opacity: 1;
 		}
 	}
 }
@@ -273,14 +297,6 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 		background: $menu;
 		z-index: 1;
 
-		#viewImagesButton {
-			position: absolute;
-			font-size: 1rem;
-			top: 0;
-			right: 0;
-			font-family: verdana, sans-serif;
-		}
-
 		li {
 			display: inline-block;
 			font-weight: normal;
@@ -317,8 +333,9 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 	box-sizing: border-box;
 	height: $headerHeight;
 	text-align: center;
-	background: none;
 	border-bottom: $tabmenuHeight solid hsla(0,0%,0%,.2);
+	background: linear-gradient(hsla(0, 0%, 0%, 0.15) 0px, hsla(0, 0%, 0%, 0) 22px);
+	background-clip: padding-box;
 }
 
 #header-img-a {
@@ -345,11 +362,11 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 
 .pagename {
 	margin: auto;
-	font: normal 3rem/1 arial, sans-serif;
+	font: normal 2.5rem/1 arial, sans-serif;
 	text-rendering: optimizeLegibility;
 	text-shadow: 0 0px 10px rgba(0,0,0,0.3);
 	color: white;
-	height: 3rem;
+	height: 2.5rem;
 	position: absolute;
 	top: 0; right: 0; bottom: 0; left: 0;
 
@@ -358,11 +375,14 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 		color: inherit;
 		text-transform: uppercase;
 		font-weight: bold;
-		border-bottom: 2px solid transparent;
+
+		&:visited {
+			color: inherit;
+		}
 
 		&:hover {
 			text-decoration: none;
-			border-color: white;
+			border-bottom: 2px solid;
 		}
 	}
 }
@@ -370,10 +390,10 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 #header-bottom-right {
 	position: fixed;
 	box-sizing: border-box;
-	top: 0;
-	right: 0;
-	bottom: auto;
-	left: auto;
+	top: 0 !important;
+	right: 0 !important;
+	bottom: auto !important;
+	left: auto !important;
 	width: $sidebarWidth;
 	height: $userbarHeight;
 	padding: 0 5px 0 0;
@@ -417,10 +437,6 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 		background: inherit;
 	}
 
-	.user {
-		color: transparent;
-	}
-
 	.userkarma {
 		position: absolute;
 		top: 22px;
@@ -447,14 +463,12 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 		font-size: 16px;
 		color: hsl(0,0%,0%);
 		text-shadow: none;
-		opacity: .6;
 	}
 
 	#mail {
 		color: transparent !important;
 
 		&.nohavemail {
-			opacity: .6;
 			background-image: url(%%sprite%%);
 			background-position: -19px -87px;
 		}
@@ -469,7 +483,6 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 		vertical-align: middle;
 
 		&.nohavemail {
-			opacity: .6;
 			background-position: -18px -68px;
 		}
 
@@ -479,7 +492,6 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 	}
 
 	.pref-lang {
-		opacity: .6;
 		@extend %textToIcon;
 		background-image: url(%%sprite%%);
 		background-position: -18px -52px;
@@ -491,7 +503,6 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 	}
 
 	.logout a {
-		opacity: .6;
 		@extend %textToIcon;
 		background-image: url(%%sprite%%);
 		background-position: -18px -36px;
@@ -516,17 +527,16 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 		font-size: 1.3rem;
 	}
 
-	#mail.nohavemail:hover,
-	#modmail.nohavemail:hover,
-	.pref-lang:hover,
-	.logout a:hover,
-	.gearIcon:hover::after {
-		opacity: 1;
-	}
-
 	.message-count {
 		color: black;
 		display: inline;
+	}
+}
+
+body.loggedin {
+
+	.user {
+		color: transparent; // hide brackets around karma
 	}
 }
 
@@ -545,7 +555,6 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 		@extend %buttonRaised;
 		margin: 0px 5px 5px 0px;
 		padding: 0 12px;
-		font-size: 1.1rem;
 		background-color: hsl(0,0%,50%);
 		display: block;
 		overflow: visible;
@@ -593,6 +602,7 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 
 		.subscribe-button a.active {
 			padding: 0;
+			font-size: 1.1rem;
 		}
 	}
 
@@ -622,14 +632,14 @@ body.res #sr-header-area a.RESShortcutsCurrentSub,
 		input[type=text] {
 			width: $sidebarWidth - 20;
 			padding: 8px 8px 8px 5px;
-			border: none;
-			box-shadow: 0 0 0 1px hsla(0,0%,0%,.12);
+			border: 1px solid hsla(0,0%,0%,.12);
 			background: hsl(0,0%,100%);
-			transition: all .2s;
+			background-clip: padding-box;
+			transition: border .2s;
 
 			&:hover,
 			&:focus {
-				box-shadow: 0 0 0 1px hsla(0,0%,0%,.32);
+				border-color: hsla(0,0%,0%,.32);
 				outline: none;
 			}
 		}
@@ -997,7 +1007,6 @@ body > .content {
 
 .link {
 	margin: 0 0 0 0;
-	padding: 8px 8px 0 8px;
 
 	.flat-list {
 		padding: 0;
@@ -1007,6 +1016,13 @@ body > .content {
 	.entry {
 		overflow: visible;
 		margin-left: 64px;
+		padding: 5px 5px 0 5px;
+
+		&:after {
+			content: "";
+			display: block;
+			clear: left;
+		}
 	}
 
 	.title {
@@ -1022,6 +1038,8 @@ body > .content {
 	.midcol {
 		font-weight: normal;
 		margin-top: 1px;
+		cursor: default;
+		line-height: 1;
 	}
 
 	.tagline {
@@ -1043,8 +1061,23 @@ body > .content {
 		color: hsl(0,0%,50%);
 	}
 
+
 	.expando {
-		position: relative; // place over sidebar
+
+		&>form>.md-container {
+			padding: 5px 10px;
+		}
+	}
+}
+
+@include keyframes(slideDown) {
+	from {
+		top: -10px;
+		opacity: 0;
+	}
+	to {
+		top: 0;
+		opacity: 1;
 	}
 }
 
@@ -1057,8 +1090,26 @@ body.listing-page .link .entry,
 	border-bottom: 1px solid hsl(0,0%,88%);
 }
 
+body.listing-page .link .expando > form {
+	position: relative;
+	@include animation(slideDown .3s ease 1 normal forwards running);
+}
+
+div.madeVisible {
+	padding-bottom: 10px;
+}
+
+.thumbnail {
+	margin: 5px 5px 5px 0;
+}
+
+.link .thumbnail + .entry {
+	margin-left: 137px;
+}
+
 // Handle links that have thumbnails
 @media (min-width: $smallViewport) {
+
 	.link .thumbnail + .entry {
 		margin-left: 165px;
 	}
@@ -1067,9 +1118,9 @@ body.listing-page .link .entry,
 		margin-left: 210px;
 	}
 
-	// Thumbnails
-	.link .thumbnail {
-		margin-bottom: 10px;
+	.link .thumbnail:hover {
+		overflow: visible;
+		z-index: 2;
 	}
 
 	.thing:not(.self) {
@@ -1077,7 +1128,6 @@ body.listing-page .link .entry,
 		.thumbnail:not(.default):not(.nsfw) {
 			width: 90px;
 			height: 60px;
-			margin: -5px 0 10px 0;
 			position: relative;
 		}
 
@@ -1087,13 +1137,13 @@ body.listing-page .link .entry,
 			display: block;
 			position: absolute;
 			top: 0;
-			left: 0;
+			right: 0;
+			pointer-events: none;
 		}
 
 		&:not([data-domain="reddit.com"]) .thumbnail:not(.default):hover img {
 			width: 140px;
-			top: -30px;
-			left: -25px;
+			box-shadow: $shadow-8dp;
 		}
 	}
 
@@ -1113,15 +1163,14 @@ body.listing-page .link .entry,
 		overflow: visible;
 		position: relative;
 		background: white;
-		margin-bottom: 10px;
 	}
 
 	.link .thumbnail + .entry div.madeVisible {
-		margin-left: -101px;
+		margin-left: -106px;
 	}
 
 	body.comments-page .link .thumbnail + .entry div.madeVisible {
-		margin-left: -156px;
+		margin-left: -151px;
 	}
 
 	.thumbnail {
@@ -1129,13 +1178,10 @@ body.listing-page .link .entry,
 		&.default,
 		&.nsfw,
 		&.self {
-			margin: 0 15px;
+			margin-left: 15px;
+			margin-right: 15px;
 		}
 	}
-
-	/* addon animate-thumbs */
-	.thing:not(.self) .thumbnail:not(.default) img { transition: width .1s, left .1s, top 1s .75s; }
-	/* .end */
 }
 
 div.madeVisible a.madeVisible {
@@ -1144,6 +1190,7 @@ div.madeVisible a.madeVisible {
 	video,
 	img {
 		display: block;
+		box-shadow: $shadow-8dp;
 	}
 }
 
@@ -1270,18 +1317,20 @@ body > .content .link .midcol, .midcol-spacer {
 }
 
 // RES pinHeader
-body.pinHeader-sub div#header-bottom-right {
-	top: 22px !important;
-	opacity: .8;
-}
+body.pinHeader-sub, body.pinHeader-subanduser {
 
-body.pinHeader-userbar #header-bottom-right {
-	height: 22px;
-}
+	#sr-header-area:not(:hover) {
+		background: linear-gradient(hsla(0, 0%, 0%, 0.3) 0px, hsla(0, 0%, 0%, .15) 22px);
+	}
 
-body.pinHeader-subanduser #header-bottom-right {
-	height: 22px;
-	top: 22px;
+	#header-bottom-left {
+		margin-top: 0;
+		background: none;
+	}
+
+	#header-bottom-right {
+		top: 22px !important;
+	}
 }
 
 div.imgCaptions,
@@ -1289,13 +1338,22 @@ div.imgCaptions,
 	white-space: normal;
 }
 
-// selectedEntry
-.entry.RES-keyNav-activeElement,
-.entry.RES-keyNav-activeElement .md-container {
+// selected links
+.link .entry.RES-keyNav-activeElement {
+	background-color: transparent !important;
+	box-shadow: -3px 0 0 0 $linkDefault;
+}
+.link .entry.RES-keyNav-activeElement .md-container {
 	background-color: transparent !important;
 }
-.entry.RES-keyNav-activeElement .tagline,
-.thing.morechildren .entry.RES-keyNav-activeElement {
+
+// selected comments
+.comment .entry.RES-keyNav-activeElement,
+.comment .entry.RES-keyNav-activeElement .md-container {
+	background-color: transparent !important;
+}
+.comment .entry.RES-keyNav-activeElement .tagline,
+.comment.morechildren .entry.RES-keyNav-activeElement {
 	color: black;
 	background-color: hsla(0,0%,0%,.12) !important;
 	border-radius: 5px;
@@ -1377,17 +1435,16 @@ h2#wiki_heading_2 {
 	}
 }
 
-/* addon blockquote-cards */
+/*addon blockquote-cards*/
 .side .md > blockquote {
 	margin: 16px 0;
 	padding: 10px;
 	border-width: 0 0 3px 0;
-	background: $card;
+	background: hsl(195, 100%, 40%);
 	border-radius: 3px;
 	border-style: solid;
 	border-color: hsla(0,0%,0%,.18);
 	color: white;
-	background-image: linear-gradient(-13deg,rgba(255,255,255,0) 50%,rgba(255,255,255,0.1) 51%);
 
 	h2 {
 		margin: 0 0 10px 0;
@@ -1431,10 +1488,10 @@ h2#wiki_heading_2 {
 	}
 
 	&>h6 + blockquote {
-		background-color: hsl(140,70%,45%);
+		background-color: hsl(140, 80%, 33%);
 	}
 }
-/* .end */
+/*.end*/
 
 .link .usertext .usertext-edit > .md {
 	padding-left: 0;
@@ -1460,7 +1517,7 @@ body:not(.submit-page) .usertext-buttons {
 	font-size: 1rem;
 }
 
-/* addon side-menu */
+/*addon side-menu*/
 .side .md > h5 + ul {
 	margin: 8px -10px 16px -10px;
 	padding: 0;
@@ -1563,7 +1620,7 @@ body:not(.submit-page) .usertext-buttons {
 		}
 	}
 }
-/* .end */
+/*.end*/
 
 body.submit-page {
 
@@ -1695,37 +1752,11 @@ form.submit > .spacer {
 	}
 }
 
-/* addon flair-basic */
-.flair {
-	padding: 0 5px;
-	font-size: inherit;
-	font-style: italic;
-	border: none;
-	color: inherit;
-	background: none;
-	max-width: 200px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	vertical-align: bottom;
+.menuarea {
+	margin-bottom: 15px;
+	padding: 0 0 10px 0;
+	border-bottom: 1px solid hsla(0,0%,0%,.12);
 }
-.linkflairlabel {
-	padding: 0 0px 0 0;
-	max-width: 150px;
-	font-size: 1.2rem;
-	font-family: "arial black", sans-serif;
-	font-weight: 900; // Firefox fix for arial black
-	color: hsl(200,20%,60%);
-	border: none;
-	background: none;
-	line-height: 1;
-	vertical-align: middle;
-	text-transform: uppercase;
-}
-.title + .linkflairlabel {
-	padding: 0 0 0 5px;
-}
-/* .end */
 
 .commentarea {
 
@@ -1869,6 +1900,11 @@ body.moderator #REScommentNavToggle {
 
 	.submit {
 		margin-right: 0;
+
+		button {
+			@extend %buttonRaised;
+			margin-right: 0;
+		}
 	}
 }
 
@@ -1923,7 +1959,7 @@ body.submit-page .formtabs-content .spacer:last-of-type .title {
 	margin: 0;
 }
 
-.content .RESBigEditorPop {
+body.res .content .RESBigEditorPop {
 	margin-top: 0;
 }
 
@@ -2029,7 +2065,7 @@ body.res {
 }
 
 .link .md pre {
-		background-color: hsla(0,0%,0%,.07);
+		background-color: hsla(0,0%,0%,.03);
 }
 
 .arrow {
@@ -2065,18 +2101,21 @@ body.res {
 			width: auto;
 			padding-left: 15px;
 			border: none;
-			background: rgba(0, 0, 0, .5);
+			background: hsla(0,0%,35%,.9);
 			border-radius: 0 0 0 5px;
 			color: white;
 			transition: background .2s;
+			height: 22px;
+			line-height: 21px;
 
 			&:hover {
-				background: hsla(0,0%,0%,.9);
+				background: hsla(0,0%,30%,1);
 			}
 
 			#userbarToggle {
 				background: transparent;
 				color: white;
+				line-height: 22px;
 			}
 
 			a {
@@ -2124,6 +2163,10 @@ body.res {
 		}
 	}
 
+	body:not(.loggedin) .user {
+		color: hsl(0,0%,80%);
+	}
+
 	.side {
 		margin-top: 0;
 	}
@@ -2146,24 +2189,23 @@ body.res {
 	}
 }
 
-/* addon banner-credit */
+/*addon banner-credit*/
 #header-bottom-left:after {
 	content: none;
 	position: absolute;
 	right: 0;
 	bottom: $tabmenuHeight;
-	font: 1.1rem/1.5 monospace;
+	font: italic 1.1rem/1.5 verdana, sans-serif;
 	padding: 0 3px;
 	background: hsla(0,0%,0%,.2);
 	color: white;
 }
-/* .end */
+/*.end*/
 
-/* addon expandos */
+/*addon expandos*/
 .expando-button {
 	position: relative;
 	color: transparent !important; // RES fix.
-	cursor: default;
 
 	&:before {
 		content: "";
@@ -2203,7 +2245,7 @@ body.res {
 .md .expando-button {
 	margin: 0 2px;
 }
-/* .end */
+/*.end*/
 
 /*addon flair-selector*/
 .flairselector.drop-choices.active {
@@ -2302,35 +2344,25 @@ body.res {
 		}
 	}
 
-	#header .tabmenu #viewImagesButton {
-		position: static;
-		font: inherit;
-	}
-
-	// Compensate for smaller thumbnails.
-	.link .thumbnail + .entry .tagline {
-		margin-left: 75px;
-	}
-
 	.side {
 		position: absolute;
 		right: 0;
-		margin-right: -320px;
+		margin-right: -310px;
 		transition: margin-right .3s .15s ease-in-out;
 		z-index: 101;
 
 		&:before {
 			content: "<>";
-			position: fixed;
+			position: absolute;
 			width: 36px;
 			text-align: center;
-			top: 49%;
-			right: -18px;
+			top: 150px;
+			left: -8px;
 			font: bold 24px/36px arial, sans-serif;
 			color: white;
 			background: hsl(200,100%,50%);
 			border-radius: 50%;
-			box-shadow: $shadow-8dp;
+			box-shadow: 0 6px 6px hsla(0,0%,0%,.2);
 			transition: all .3s .15s;
 			cursor: default;
 		}
@@ -2339,7 +2371,8 @@ body.res {
 			margin-right: 0;
 
 			&:before {
-				right: -40px;
+				left: -36px;
+				background: hsl(0,0%,50%);
 			}
 		}
 	}
@@ -2349,4 +2382,13 @@ body.res {
 	}
 }
 
-/* End of A_D stylesheet */
+/*addon nightmode*/
+@import 'nightmode';
+/*.end*/
+
+button, submit {
+	&::-moz-focus-inner { // scss-lint:disable PseudoElement
+		border: none;
+		padding: 0;
+	}
+}

@@ -1,0 +1,314 @@
+$nm_dark1: #151515;
+$nm_dark2: #212121;
+$nm_dark3: #303030;
+$nm_dark4: #424242;
+$nm_primaryText: hsl(0,0%,87%);
+$nm_linkDefault: hsl(210, 50%, 70%);
+$nm_linkVisited: hsl(300,20%,60%);
+$nm_divider: hsla(0,0%,100%,.12);
+$nm_cardBackground: $nm_dark2;
+
+%nm_sheet {
+	color: $nm_primaryText;
+	box-shadow: 0 0 0 1px $nm_divider;
+	background-color: $nm_cardBackground;
+}
+
+.res-nightmode {
+	color: $nm_primaryText;
+	background-color: $nm_dark1;
+
+	.md a:visited {
+		color: $nm_linkDefault;
+	}
+
+	#header {
+		background-color: $nm_dark4;
+
+		.tabmenu {
+
+			li {
+
+				&.selected a {
+					color: white;
+					background-color: $nm_dark1;
+					box-shadow: none;
+				}
+			}
+		}
+	}
+
+	#sr-header-area {
+		background: none;
+
+		&:hover {
+			background-color: #444;
+		}
+	}
+
+	.pagename {
+		opacity: .88;
+	}
+
+	.livePreview {
+		background-color: hsl(0,0%,15%) !important;
+	}
+
+	.link {
+
+		.rank {
+			color: hsl(0,0%,50%);
+		}
+
+		div.madeVisible {
+			color: $nm_primaryText;
+			background-color: #262626;
+		}
+	}
+
+	.thing .title {
+		color: $nm_primaryText;
+	}
+
+	.thing .title:visited,
+	.thing.visited .title,
+	.combined-search-page .search-result a:visited,
+	.combined-search-page .search-result a:visited > mark {
+		color: hsl(0,0%,65%); /* see also styleTweaks.js */
+	}
+
+	.tagline,
+	.search-result-meta {
+		color: hsl(0,0%,75%);
+	}
+
+	.tagline a,
+	.search-result-meta a {
+		color: inherit;
+	}
+
+	.entry .buttons li a:hover {
+		color: hsl(0,0%,75%);
+	}
+
+	&.listing-page .link .entry,
+	.commentarea .linklisting .link .entry {
+		border-bottom-color: $nm_divider;
+	}
+
+	.side .linkinfo,
+	.sidecontentbox,
+	.login-form-side,
+	.sidebox .spacer,
+	.side form.usertext {
+		@extend %nm_sheet;
+	}
+
+	.content {
+		background: $nm_dark1;
+	}
+
+	.sidebox {
+		background: none;
+	}
+
+	.titlebox .bottom {
+		color: gray;
+	}
+
+	.side {
+		color: $nm_primaryText;
+		border-color: hsl(0,0%,12%);
+		background-color: $nm_dark3;
+
+		.spacer .titlebox .redditname {
+			background-color: transparent;
+		}
+
+		.titlebox,
+		.content,
+		.leavemoderator,
+		.leavecontributor-button {
+			background-color: transparent;
+		}
+
+		.titlebox {
+
+			form.flairtoggle {
+				background-color: transparent;
+			}
+		}
+
+		.shortlink input {
+			border-color: hsla(0,0%,100%,.1);
+		}
+
+		.md {
+
+			&>blockquote {
+				color: white;
+
+				ul, ol {
+					background-color: transparent;
+				}
+
+				li,
+				p {
+					color: white;
+				}
+			}
+
+			ul {
+				color: $nm_primaryText;
+				background-color: $nm_cardBackground;
+			}
+
+			hr {
+				background: hsla(0,0%,100%,.12);
+			}
+
+			h5 + ul {
+
+				&>li {
+
+					&:hover,
+					&>ul > li:hover > a {
+						background-color: hsla(0,0%,100%,.12);
+					}
+
+					&>sup,
+					&>p sup {
+						background-position: 0px -22px;
+					}
+
+					&> a,
+					&> p > a,
+					&> ul > li > a,
+					&> ul > li > p a {
+						color: $nm_linkDefault;
+					}
+				}
+			}
+
+		}
+
+		#search {
+
+			input[type=text] {
+				background: hsl(0,0%,15%);
+				box-shadow: 0 0 0 1px hsla(0, 0%, 100%, .12);
+			}
+
+			input[type=submit] {
+				background-position: 9px 9px;
+			}
+
+			#searchexpando {
+				background-color: $nm_dark1;
+			}
+		}
+	}
+
+	.panestack-title,
+	.nav-buttons {
+		border-top-color: $nm_divider;
+	}
+
+	.flair,
+	.linkflairlabel {
+		background-color: transparent;
+	}
+
+	.linkflairlabel {
+		color: hsl(200, 30%, 55%);
+	}
+
+	.RESDropdownList {
+		color: $nm_primaryText;
+		background-color: $nm_dark3;
+
+		li,
+		a,
+		li:hover a,
+		a:hover {
+			background: none;
+		}
+
+		li:hover {
+			background: hsla(0,0%,100%,.12);
+		}
+	}
+
+	.commentarea {
+
+		.menuarea {
+
+			&>div:hover,
+			&>div a:hover {
+				color: $nm_primaryText;
+			}
+		}
+	}
+
+	#REScommentNavToggle {
+
+		&>.commentNavSortType {
+			color: hsl(0,0%,50%);
+
+			&:hover {
+				color: $nm_primaryText;
+			}
+		}
+	}
+
+	#progressIndicator {
+		color: $nm_primaryText;
+		border-color: $nm_divider;
+		background-color: $nm_dark4;
+	}
+
+	.link .entry.RES-keyNav-activeElement {
+		box-shadow: -3px 0 0 0 hsla(0,0%,30%,1);
+	}
+
+	.comment .entry.RES-keyNav-activeElement .tagline,
+	.comment.morechildren .entry.RES-keyNav-activeElement {
+		color: white;
+		background-color: hsla(0,0%,100%,.12) !important;
+	}
+
+	.RES-keyNav-activeElement .md-container > .md,
+	.RES-keyNav-activeElement .md-container > .md p {
+		color: $nm_primaryText !important;
+	}
+
+	.side .subscribe-button a.remove,
+	.subButtons .RESshortcut.remove,
+	.subButtons .RESDashboardToggle.remove {
+		color: $nm_primaryText;
+	}
+
+	.usertext button:not(.save),
+	#url-field button {
+		color: $nm_primaryText;
+
+		&:hover {
+			background-color: hsla(0,0%,100%,.12);
+		}
+	}
+
+	.subButtons {
+
+		.RESshortcut:not(.remove),
+		.RESDashboardToggle:not(.remove) {
+			color: $nm_primaryText;
+			background-color: $nm_dark3;
+		}
+	}
+
+	@media (min-width: $largeViewport + 1) {
+		#header-bottom-right {
+			background: hsl(0,0%,50%);
+		}
+	}
+}
