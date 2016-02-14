@@ -419,7 +419,7 @@ body.submit-page > div.content > h1, .searchpane h4, body.submit-page .formtabs-
 
 .usertext button { margin: 0; }
 
-.content .RESBigEditorPop { margin-top: 0; }
+body.res .content .RESBigEditorPop { margin-top: 0; }
 
 body.with-listing-chooser .listing-chooser { z-index: 100; border-radius: 0 10px 0 0; }
 body.with-listing-chooser #header .tabmenu { margin-left: 0; }
@@ -451,19 +451,11 @@ body.res .NERPageMarker { font-size: 1.2rem; width: auto; margin: 20px 0px 10px 
 
 @media (max-width: 1600px) { #sr-header-area { right: 0; }
   #header { margin-right: 0; }
-  #header #header-bottom-right { position: absolute; width: auto; padding-left: 15px; border: none; background: rgba(89, 89, 89, 0.9); border-radius: 0 0 0 5px; color: white; transition: background .2s; height: 22px; line-height: 21px; }
-  #header #header-bottom-right:hover { background: #4d4d4d; }
-  #header #header-bottom-right #userbarToggle { background: transparent; color: white; line-height: 22px; }
-  #header #header-bottom-right a { color: white; }
-  #header #header-bottom-right .userkarma { position: static; color: white; }
+  #header #header-bottom-right { position: absolute; width: auto; padding-left: 15px; border: none; background: rgba(247, 247, 247, 0.9); border-radius: 0 0 0 5px; transition: background .2s; height: 22px; line-height: 21px; }
+  #header #header-bottom-right:hover { background: #f7f7f7; }
+  #header #header-bottom-right #userbarToggle { background: transparent; line-height: 22px; }
+  #header #header-bottom-right .userkarma { position: static; color: #666666; }
   #header #header-bottom-right #RESAccountSwitcherIcon { margin-right: 0; }
-  #header #header-bottom-right #mail.nohavemail { background-position: 0px -87px; }
-  #header #header-bottom-right #modmail.nohavemail { background-position: -0px -68px; }
-  #header #header-bottom-right #modmail.havemail { background-position: -34px -68px; }
-  #header #header-bottom-right .pref-lang { background-position: -0px -52px; }
-  #header #header-bottom-right .gearIcon::after { color: white; }
-  #header #header-bottom-right .logout a { background-position: -0px -36px; }
-  body:not(.loggedin) .user { color: #cccccc; }
   .side { margin-top: 0; }
   body.res .res-floater-visibleAfterScroll #NREMail, body.res .res-floater-visibleAfterScroll #NREMailCount { display: inline-block; } }
 .RESDialogSmall > h3 { z-index: auto; }

@@ -2101,30 +2101,30 @@ body.res {
 			width: auto;
 			padding-left: 15px;
 			border: none;
-			background: hsla(0,0%,35%,.9);
+			background: hsla(0,0%,97%,.9);
 			border-radius: 0 0 0 5px;
-			color: white;
+			//color: white;
 			transition: background .2s;
 			height: 22px;
 			line-height: 21px;
 
 			&:hover {
-				background: hsla(0,0%,30%,1);
+				background: hsla(0,0%,97%,1);
 			}
 
 			#userbarToggle {
 				background: transparent;
-				color: white;
+				//color: white;
 				line-height: 22px;
 			}
 
 			a {
-				color: white;
+				//color: white;
 			}
 
 			.userkarma {
 				position: static;
-				color: hsl(0,0%,100%);
+				color: hsl(0,0%,40%);
 			}
 
 			#RESAccountSwitcherIcon {
@@ -2134,37 +2134,37 @@ body.res {
 			#mail {
 
 				&.nohavemail {
-					background-position: 0px -87px;
+					//background-position: 0px -87px;
 				}
 			}
 
 			#modmail {
 
 				&.nohavemail {
-					background-position: -0px -68px;
+					//background-position: -0px -68px;
 				}
 
 				&.havemail {
-					background-position: -34px -68px;
+					//background-position: -34px -68px;
 				}
 			}
 
 			.pref-lang {
-				background-position: -0px -52px;
+				//background-position: -0px -52px;
 			}
 
 			.gearIcon::after {
-				color: hsl(0,0%,100%);
+				//color: hsl(0,0%,100%);
 			}
 
 			.logout a {
-				background-position: -0px -36px;
+				//background-position: -0px -36px;
 			}
 		}
 	}
 
 	body:not(.loggedin) .user {
-		color: hsl(0,0%,80%);
+		//color: hsl(0,0%,80%);
 	}
 
 	.side {
