@@ -274,7 +274,7 @@ div.imgCaptions, .md div.imgCaptions { white-space: normal; }
 
 .comment .entry.RES-keyNav-activeElement, .comment .entry.RES-keyNav-activeElement .md-container { background-color: transparent !important; }
 
-.comment .entry.RES-keyNav-activeElement .tagline, .comment.morechildren .entry.RES-keyNav-activeElement { color: black; background-color: rgba(0, 0, 0, 0.12) !important; border-radius: 5px; }
+.comment .entry.RES-keyNav-activeElement .tagline, .thing.morechildren .entry.RES-keyNav-activeElement { color: black; background-color: rgba(0, 0, 0, 0.12) !important; border-radius: 5px; }
 
 .md h1, .md h2, .md h3, .md h4, .md h5, .md h6, .side .md h1, .side .md h2, .side .md h3, .side .md h4, .side .md h5, .side .md h6, .wiki-page-content .md h1, .wiki-page-content .md h2, .wiki-page-content .md h3, .wiki-page-content .md h4, .wiki-page-content .md h5, .wiki-page-content .md h6, h2#wiki_heading_2 { color: inherit; font-weight: normal; font-family: tahoma, arial, sans-serif; line-height: 1; margin: 1.2em 0 .5em; }
 
@@ -552,7 +552,7 @@ body.res .NERPageMarker { font-size: 1.2rem; width: auto; margin: 20px 0px 10px 
 .res-nightmode #REScommentNavToggle > .commentNavSortType:hover { color: #dedede; }
 .res-nightmode #progressIndicator { color: #dedede; border-color: rgba(255, 255, 255, 0.12); background-color: #424242; }
 .res-nightmode .link .entry.RES-keyNav-activeElement { box-shadow: -3px 0 0 0 #4d4d4d; }
-.res-nightmode .comment .entry.RES-keyNav-activeElement .tagline, .res-nightmode .comment.morechildren .entry.RES-keyNav-activeElement { color: white; background-color: rgba(255, 255, 255, 0.12) !important; }
+.res-nightmode .comment .entry.RES-keyNav-activeElement .tagline, .res-nightmode .thing.morechildren .entry.RES-keyNav-activeElement { color: white; background-color: rgba(255, 255, 255, 0.12) !important; }
 .res-nightmode .RES-keyNav-activeElement .md-container > .md, .res-nightmode .RES-keyNav-activeElement .md-container > .md p { color: #dedede !important; }
 .res-nightmode .side .subscribe-button a.remove, .res-nightmode .subButtons .RESshortcut.remove, .res-nightmode .subButtons .RESDashboardToggle.remove { color: #dedede; }
 .res-nightmode .usertext button:not(.save), .res-nightmode #url-field button { color: #dedede; }
