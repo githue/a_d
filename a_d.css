@@ -464,17 +464,10 @@ body.res .NERPageMarker { font-size: 1.2rem; width: auto; margin: 20px 0px 10px 
 #header-bottom-left:after { content: none; position: absolute; right: 0; bottom: 28px; font: italic 1.1rem/1.5 verdana, sans-serif; padding: 0 3px; background: rgba(0, 0, 0, 0.2); color: white; }
 
 /*.end*/
-/*addon expandos*/
-.expando-button { position: relative; color: transparent !important; }
-.expando-button:before { content: ""; position: absolute; width: 7px; height: 8px; right: 3px; bottom: 2px; background: white; }
-.expando-button:after { content: ""; position: absolute; right: 2px; bottom: 2px; width: 9px; height: 9px; background: url(%%sprite%%) -16px -135px no-repeat; transition: transform .2s ease-in-out; }
-.expando-button.expanded:after { -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); background-position: -16px -135px; }
-.expando-button:hover:after { background-position: -3px -135px; }
-.expando-button:hover:before { background-color: #369; }
+.expando-button { color: transparent !important; }
 
-.md .expando-button { margin: 0 2px; }
+.thing .md .expando-button { margin: 0 0 0 4px; }
 
-/*.end*/
 /*addon flair-selector*/
 .flairselector.drop-choices.active { border: 1px solid rgba(0, 0, 0, 0.12); padding: 0 !important; box-shadow: -3px 6px 0px 0px rgba(0, 0, 0, 0.2); }
 
