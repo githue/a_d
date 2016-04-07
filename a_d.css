@@ -475,10 +475,10 @@ body.res .NERPageMarker { font-size: 1.2rem; width: auto; margin: 20px 0px 10px 
 
 .flairselector h2 { margin: 0 0 10px; padding: 5px; font: 1.6rem/1 arial, sans-serif; text-align: left; color: black; background: transparent; }
 .flairselector .flairoptionpane ul { width: auto !important; max-width: none; display: block; }
-.flairselector .flairoptionpane ul li { padding: 5px; }
+.flairselector .flairoptionpane ul li { padding: 5px; border: none; }
 .flairselector .flairoptionpane ul li.selected { border: none; background: rgba(0, 0, 0, 0.12); }
 .flairselector form { border: none; padding: 5px; text-align: left; white-space: normal; }
-.flairselector form .flairremove { margin: 0 0 10px 0; color: transparent; }
+.flairselector form .flairremove { margin: 0 0 10px 0; color: transparent; font-size: 1.1rem; }
 .flairselector form .flairremove a { color: crimson; padding: 0; }
 .flairselector form .linkflair, .flairselector form .flair { display: none; }
 .flairselector form button { margin: 0 8px 0 0; }
